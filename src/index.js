@@ -19,9 +19,6 @@ Puppeteer.registerCustomQueryHandler('getById', {
   // Navigate the page to a URL
   await page.goto('https://developer.chrome.com/');
 
-  // Select with custom Selector
-  const customSelector = await page.waitForSelector('::p-getById(customId)');
-
   // Set screen size
   await page.setViewport({ width: 1080, height: 1024 });
 
@@ -29,7 +26,7 @@ Puppeteer.registerCustomQueryHandler('getById', {
   await page.type('.devsite-search-field', 'automate beyond recorder');
 
   // Wait and click on first result
-  const searchResultSelector = '.';
+  const searchResultSelector = '.devsite-result-item-link';
   await page.waitForSelector(searchResultSelector);
   await page.click(searchResultSelector);
 
