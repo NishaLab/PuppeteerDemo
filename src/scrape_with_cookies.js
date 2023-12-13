@@ -6,24 +6,13 @@ import jsonfile from "jsonfile";
     headless: false,
   });
   const page = await browser.newPage();
+  const file = 'cookies.json'
+  const cookies = await jsonfile.readFile(file)
+  await page.setCookie(...cookies)
 
-  // Navigate the page to a URL
-  await page.goto("https://truyenyy.pro/auth/betatruyen/");
+  await page.goto("https://truyenyy.pro");
   await page.setViewport({ width: 1980, height: 1024 });
-  const betaButtonSelector = ".weui-btn";
-  await page.waitForSelector(betaButtonSelector);
-  await page.click(betaButtonSelector);
-  await page.waitForNavigation();
   await page.waitForSelector(".genre");
-  const cookies = await page.cookies();
-
-  jsonfile.writeFile("cookies.json", cookies, { spaces: 2 }, function (err) {
-    if (err) {
-      console.log("The file could not be written.", err);
-    }
-    console.log("Session has been successfully saved");
-  });
-
   await page.waitForSelector(".rbt-input-main");
   await page.type(".rbt-input-main", "quỷ bí chi chủ");
   await page.click(".rbt-input-main");
